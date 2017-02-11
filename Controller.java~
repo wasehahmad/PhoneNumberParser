@@ -1,0 +1,23 @@
+*import java.util.*;
+
+public class Controller{
+  
+  
+  
+  public void run(){
+    
+    
+    
+  }
+  
+  public static main void(String[] args){
+    
+    Controller parser = new Controller();
+    
+    parser.run();
+    
+    
+    
+  }
+  
+}
