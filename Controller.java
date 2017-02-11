@@ -6,7 +6,8 @@ public class Controller{
   
   public void run(){
     
-    
+    URLParser parser = new URLParser();
+    parser.loadURL("http://google.com");
     
   }
   
