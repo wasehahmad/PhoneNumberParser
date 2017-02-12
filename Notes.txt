@@ -1,1 +1,2 @@
-
+script 2017_02_11 8:04pm : (?<!\b<script\b)(?:\<[\w\s\.]+)(\d{3})([\)\s\-\.]{0,2})(\d{3})([\)\s\-\.]{0,2})(\d{4})
+regex for removing tags: set the scanner delimiter to "<.*?>"

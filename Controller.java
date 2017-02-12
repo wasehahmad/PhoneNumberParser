@@ -7,7 +7,7 @@ public class Controller{
   public void run(){
     
     URLParser parser = new URLParser();
-    parser.loadURL("http://google.com");
+    parser.loadURL("http://stackoverflow.com/questions/9776231/regular-expression-to-validate-us-phone-numbers","(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})");
     
   }
   
