@@ -43,10 +43,12 @@ public class URLParser{
   }
   
   public Matcher findMatches(String htmlCode, String regex){
-    Pattern pattern = Pattern.compile(regex);
+    Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
     Matcher matcher = pattern.matcher(htmlCode);
     while(matcher.find()){
-      matches.add(matcher.group());
+      if(matcher.group("Valid")!=null){
+        matches.add(matcher.group("Valid"));
+      }
     }
     return matcher.reset();
     

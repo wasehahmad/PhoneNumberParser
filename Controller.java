@@ -7,7 +7,7 @@ public class Controller{
   public void run(){
     
     URLParser parser = new URLParser();
-    String regex = "(?<![Ff]ax[:\\-\\s])[\\s|\\(](\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})";
+    String regex = "((?<![Ff]ax)(?<Valid>[\\s|\\(]*?(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})))|((?<=[Ff]ax)(?<invalid>.*?(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})))";
     parser.loadURL("https://www.allmenus.com/pa/easton/66281-dominos-pizza/menu/",regex);
     
   }

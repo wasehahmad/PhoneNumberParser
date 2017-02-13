@@ -48,9 +48,9 @@ public class TestURLParser extends TestCase {
   //tests to retrieve phone numbers from a string
   public void testPhoneParsing(){
     URLParser parser = new URLParser();
-    String regex = "((?<![Ff]ax)(?<Valid>[\\s|\\(]*?(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})))|((?<=[Ff]ax)(?<invalid>.*?(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})))";
+    String regex = "((?<!fax)(?<Valid>[\\s|\\(]*?(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})))|((?<=[Ff]ax)(?<invalid>.*?(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})))";
     
-    String test1 = ("(123)456-7890 \n 123 456 7890 \n 123.456.7890 \n 123-45-67890 \n 123-456-7890 \n (123) 456 789 \n fax 987 654 3210 But this is 123-456 7890");
+    String test1 = ("+1-484-541-9526(123)456-7890 \n 123 456 7890 \n 123.456.7890 \n 123-45-67890 \n 123-456-7890 \n (123) 456 789 \n faX 987 654 3210 But this is 123-456 7890");
     Matcher matcher =parser.findMatches(test1,regex);
     
     LinkedList<String> matched = parser.getMatches();
