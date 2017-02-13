@@ -7,7 +7,8 @@ public class Controller{
   public void run(){
     
     URLParser parser = new URLParser();
-    parser.loadURL("http://stackoverflow.com/questions/9776231/regular-expression-to-validate-us-phone-numbers","(?<![Ff]ax[:\\-\\s])(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})");
+    String regex = "(?<![Ff]ax[:\\-\\s])[\\s|\\(](\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})";
+    parser.loadURL("https://www.allmenus.com/pa/easton/66281-dominos-pizza/menu/",regex);
     
   }
   

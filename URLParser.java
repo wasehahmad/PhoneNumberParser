@@ -46,7 +46,7 @@ public class URLParser{
     Pattern pattern = Pattern.compile(regex);
     Matcher matcher = pattern.matcher(htmlCode);
     while(matcher.find()){
-      System.out.println(matcher.group()); 
+      matches.add(matcher.group());
     }
     
     
@@ -79,6 +79,10 @@ public class URLParser{
     
     //System.out.println(html);
     
+  }
+  
+  public LinkedList<String> getMatches(){
+   return matches;
   }
   
   
