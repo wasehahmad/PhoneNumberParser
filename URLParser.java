@@ -5,11 +5,11 @@ import java.util.regex.*;
 
 public class URLParser{
   private String currentURL;
-  private LinkedList<String> matches;
+  private LinkedList<String> matches=new LinkedList<String>();;
   
   public void loadURL(String website,String regex){
     
-    matches = new LinkedList<String>();  //instantiate the array list where the matched numbers will be kept
+    
     
     currentURL = website; //store the current website url
     
@@ -42,13 +42,13 @@ public class URLParser{
     scan.close();
   }
   
-  public void findMatches(String htmlCode, String regex){
+  public Matcher findMatches(String htmlCode, String regex){
     Pattern pattern = Pattern.compile(regex);
     Matcher matcher = pattern.matcher(htmlCode);
     while(matcher.find()){
       matches.add(matcher.group());
     }
-    
+    return matcher.reset();
     
     
   }

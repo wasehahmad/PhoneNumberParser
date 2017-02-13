@@ -3,3 +3,5 @@ regex for removing tags: set the scanner delimiter to "<.*?>"
 To prevent addition of Fax, add this regex before the remaining F(f)ax:( )(-)(?<![Ff]ax[:\-\s]\s)
 Create a group to look behind for telephone, phone, tel, (case insensitive) and then in java, use matcher to only get the group which contains the numbers
 Also, what about numbers with capital letters as the last four digits
+
+regex code for capturing groups and using their names to store them valid is not fax, invalid is fax:(?:(?<!fax)(?<Valid>[\s|\(]*?(\d{3})([\)\s\-\.]{0,2})(\d{3})([\)\s\-\.]{0,2})(\d{4}))|(?:(?<invalid>.*?(\d{3})([\)\s\-\.]{0,2})(\d{3})([\)\s\-\.]{0,2})(\d{4}))))/gi
