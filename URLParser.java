@@ -26,7 +26,7 @@ public class URLParser{
       scan = new Scanner(connection.getInputStream());
       scan.useDelimiter("\\Z"); //end of line in HTML
     }
-    catch(IOException e){
+    catch(Exception e){
       
       //return false and exit the method
       return false;
