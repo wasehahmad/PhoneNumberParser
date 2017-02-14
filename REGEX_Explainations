@@ -1,0 +1,23 @@
+REGEX: (?m)^[ \t]*\r?\n --matches all blank lines and space left before HTML code per line
+
+-- (?m) matches the rest of the pattern with a /m flag. --> multi line. Causes ^ and $ to match the begin/end of each line 
+-- ^ Position at beginning of line
+-- [ \t]*\r?\n matches consecutive spaces and tabs as many times as possible and then matches the first carriage return as well as the new line.
+
+REGEX: (<script[\s\S]*?<\/script>)|(<(.|\n)*?>) -- matches all scripts and content between scripts as well as all tags
+
+-- <script[\s\S]*?<\/script>) matches the pattern <script as is and then any character until it sees the first exact pattern </script> 
+-- | or statement
+-- (<(.|\n)*?>) matches all tags. exactly matches < and then every character and new line until it sees the first > character
+
+REGEX: ((?<![Ff]ax)(?<Valid>[\s|\(]*?(\d{3})([\)\s\-\.]{0,2})(\d{3})([\)\s\-\.]{0,2})(\d{4})))|((?<=[Ff]ax)(?<Invalid>.*?(\d{3})([\)\s\-\.]{0,2})(\d{3})([\)\s\-\.]{0,2})(\d{4}))) matches the phone numbers. If follwed by fax, matches as Invalid group and if not followed my fax, matches as "Valid group"
+
+--(?<![Ff]ax) if not lead by fax
+-- ?<Valid> name the group Valid
+-- [\s|\(]*?(\d{3}) pattern matches as many spaces, \ , and (, until it sees three consecutive digits
+-- ([\)\s\-\.]{0,2})(\d{3}) matches up to two spaces, hyphens, \ , or . before matching 3 consecutive numbers
+-- (\d{4}) matches 4 consecutive digits
+-- (?<=[Ff]ax) matches   if lead by fax
+-- ?<Invalid> names the group Invalid
+ 
+    
