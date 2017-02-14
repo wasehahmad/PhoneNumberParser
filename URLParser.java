@@ -7,7 +7,7 @@ public class URLParser{
   private String currentURL;
   private LinkedList<String> matches=new LinkedList<String>();;
   
-  public void loadURL(String website,String regex){
+  public boolean loadURL(String website,String regex){
     
     
     
@@ -19,27 +19,28 @@ public class URLParser{
       URL url = new URL(currentURL);
       URLConnection connection = url.openConnection();
       scan = new Scanner(connection.getInputStream());
-      scan.useDelimiter(/*"(<(.|\\n)*?>)|((<script)(.|\\n)*?(<\\/script>))"*/"\\Z"); //end of line in HTML
+      scan.useDelimiter("\\Z"); //end of line in HTML
     }
     catch(IOException e){
-      e.printStackTrace(); 
+      
+      //e.printStackTrace(); 
+      return false;
     }
-    
+    System.out.println("Point");
     String html = "";
     
     //scan the document
     while(scan.hasNext()){
       html = html+scan.next();   
     }
-//   System.out.println(html);
+    
     //remove scripts
     html = removeScripts(html);
-//    System.out.println(html);
-    
     
     findMatches(html,regex);
     
     scan.close();
+    return true;
   }
   
   public Matcher findMatches(String htmlCode, String regex){
@@ -58,33 +59,24 @@ public class URLParser{
   //method to remove scripts from the html string
   public String removeScripts(String string){
     string = string.replaceAll("(?m)^[ \\t]*\\r?\\n", "");
-//    try(  PrintWriter out = new PrintWriter( "filename.txt" )  ){
-//      out.println( string );
-//    }catch(Exception e){
-//      e.printStackTrace();
-//    }
+
     String regex = "(<script[\\s\\S]*?<\\/script>)|(<(.|\\n)*?>)"; 
     Pattern pattern = Pattern.compile(regex);
     Matcher matcher = pattern.matcher(string);
     System.out.println("_________________________________________"); 
-//    while(matcher.find()){
-//      System.out.println(matcher.group()); 
-//    }
     
-    return matcher.replaceAll("");
-    
-    
-    //use the regex pattern to find matches in the string
-    
-//    string = string.replaceAll(regex,"");
-//    return string.replaceAll("(<(.|\\n)*?>)","");
-    
-    //System.out.println(html);
-    
+    String result="";
+    try{
+      result = matcher.replaceAll("");
+    }catch(StackOverflowError e){
+      return string;
+    }
+    System.out.println(result);
+    return result; 
   }
   
   public LinkedList<String> getMatches(){
-   return matches;
+    return matches;
   }
   
   

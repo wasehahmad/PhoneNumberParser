@@ -18,12 +18,16 @@ public class Controller extends Program{
   private JButton generateButton;
   private JTextField urlInput;
   
-  public LinkedList<String> parse(){
+  public LinkedList<String> parse(String url){
     
     URLParser parser = new URLParser();
     String regex = "((?<![Ff]ax)(?<Valid>[\\s|\\(]*?(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})))|((?<=[Ff]ax)(?<invalid>.*?(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{3})([\\)\\s\\-\\.]{0,2})(\\d{4})))";
-    parser.loadURL("https://www.allmenus.com/pa/easton/66281-dominos-pizza/menu/",regex);
-    return parser.getMatches();
+    if(parser.loadURL(url,regex)==false){
+      return null;
+    }else{
+      return parser.getMatches();
+    }
+    
   }
   
   // draw the gui
@@ -38,6 +42,8 @@ public class Controller extends Program{
     urlInput.setColumns(20);
     
     numberArea = new JTextArea();
+    JScrollPane scrollPane = new JScrollPane(numberArea); 
+    numberArea.setEditable(false);
     
     add(generateButton, NORTH);
     add(urlInput, NORTH);
@@ -47,12 +53,23 @@ public class Controller extends Program{
   
   public void actionPerformed (ActionEvent evt) {
     if (evt.getSource() == generateButton) {  
-      //check to see if the url is valid use try catch
+      //should return null if url was invalid
       
-      //if it is, return the parsed numbers
+      LinkedList<String> numbers = parse(urlInput.getText());
       
+      //If valid, print to the text area
+      if(numbers !=null){
+        
+        numberArea.setText("");//clear the number display area
+        String text = "";
+        for(int i=0;i<numbers.size();i++){
+          numberArea.append(numbers.get(i)+"\n");
+        }
+        //numberArea.setText(text);
+      }else{
+        numberArea.setText("An error occurred. Please change the url or try again");
+      }
       
-      //
       
     }
     
